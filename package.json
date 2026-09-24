@@ -1,11 +1,16 @@
-﻿{
+{
   "name": "tides-pwa",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "description": "Standalone coastal tide dashboard and astronomical tracker with offline support and zero backend requirement. Compatible with PC, mobile, and Google TV.",
   "scripts": {
+    "dev": "vite",
+    "build": "vite build",
     "start": "node preview.js",
     "preview": "node preview.js"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
   }
 }
