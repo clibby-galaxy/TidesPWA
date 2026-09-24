@@ -1,0 +1,1845 @@
+/* ==========================================================================
+   LOCAL TIDE APPLICATION - MODERN COASTAL DESIGN SYSTEM (RESPONSIVE & FLUID)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Coastal Palette Tokens */
+  --bg-abyss: #060d17;
+  --bg-deep-navy: #0b1728;
+  --bg-marine-card: rgba(15, 29, 49, 0.72);
+  --bg-marine-card-hover: rgba(20, 38, 64, 0.85);
+  
+  --border-cyan-glow: rgba(56, 189, 248, 0.18);
+  --border-cyan-active: rgba(0, 245, 212, 0.45);
+  
+  --text-white: #f8fafc;
+  --text-driftwood: #cbd5e1;
+  --text-muted: #64748b;
+  --text-dim: #475569;
+
+  --aqua-glow: #00f5d4;
+  --tide-cyan: #38bdf8;
+  --ocean-blue: #0284c7;
+  --seafoam-teal: #14b8a6;
+  --kelp-green: #10b981;
+  --sand-amber: #f59e0b;
+  --coral-rose: #f43f5e;
+  
+  /* Radii & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  
+  --shadow-subtle: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+  --shadow-glass: 0 10px 30px -5px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  --shadow-glow-cyan: 0 0 25px rgba(56, 189, 248, 0.2);
+  --shadow-glow-teal: 0 0 25px rgba(0, 245, 212, 0.25);
+  --shadow-glow-rose: 0 0 25px rgba(244, 63, 94, 0.25);
+
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Grotesk', monospace;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES - PREVENT ANY HORIZONTAL OVERFLOW
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-abyss);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(14, 165, 233, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 25%, rgba(0, 245, 212, 0.08) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(244, 63, 94, 0.06) 0%, transparent 50%),
+    linear-gradient(180deg, #070e1a 0%, #050b14 100%);
+  background-attachment: fixed;
+  color: var(--text-white);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* Accessible & TV Remote High-Visibility Focus Outline */
+:focus-visible {
+  outline: 3px solid var(--aqua-glow);
+  outline-offset: 2px;
+  box-shadow: 0 0 15px rgba(0, 245, 212, 0.6);
+  border-radius: var(--radius-sm);
+}
+
+/* ==========================================================================
+   GLASSMORPHISM CARDS & UTILITIES
+   ========================================================================== */
+
+.card-glass {
+  background: var(--bg-marine-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-cyan-glow);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glass);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.card-glass:hover {
+  border-color: var(--border-cyan-active);
+  box-shadow: var(--shadow-glass), var(--shadow-glow-cyan);
+}
+
+/* ==========================================================================
+   APP CONTAINER & HEADER
+   ========================================================================== */
+
+.app-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 24px 48px;
+  box-sizing: border-box;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 22px;
+  width: 100%;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.brand-logo-wrap {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0284c7, #14b8a6);
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+}
+
+.brand-logo-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.brand-text {
+  min-width: 0;
+}
+
+.brand-text h1 {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(120deg, #ffffff 40%, var(--aqua-glow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+}
+
+.brand-tagline {
+  font-size: 0.78rem;
+  color: var(--text-driftwood);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.header-clock {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text-driftwood);
+  padding: 6px 12px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--border-cyan-glow);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.btn-utility {
+  background: rgba(15, 29, 49, 0.8);
+  border: 1px solid var(--border-cyan-glow);
+  color: var(--text-driftwood);
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.btn-utility:hover {
+  color: var(--text-white);
+  border-color: var(--aqua-glow);
+  background: rgba(20, 42, 70, 0.9);
+}
+
+.btn-network-chip {
+  background: rgba(14, 165, 233, 0.12);
+  border-color: rgba(56, 189, 248, 0.35);
+  color: var(--tide-cyan);
+}
+
+.btn-network-chip:hover {
+  background: rgba(14, 165, 233, 0.25);
+  border-color: var(--aqua-glow);
+  color: var(--text-white);
+  box-shadow: 0 0 12px rgba(0, 245, 212, 0.25);
+}
+
+.btn-utility.active {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.4), rgba(20, 184, 166, 0.4));
+  border-color: var(--aqua-glow);
+  color: var(--aqua-glow);
+}
+
+/* ==========================================================================
+   LOCATION SEARCH BAR & COASTAL HUBS
+   ========================================================================== */
+
+.location-bar {
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.location-bar-main {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.active-station-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1 1 240px;
+  min-width: 0;
+}
+
+.location-icon {
+  font-size: 1.3rem;
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.station-meta-text {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.station-name-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.station-name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--text-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.station-state {
+  background: rgba(14, 165, 233, 0.2);
+  color: var(--tide-cyan);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.station-id-row {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.station-sub-name {
+  color: var(--aqua-glow);
+  font-weight: 600;
+}
+
+.card-loading-dim {
+  opacity: 0.55;
+  filter: brightness(0.9);
+  transition: opacity 0.25s ease, filter 0.25s ease;
+  pointer-events: none;
+}
+
+.search-input-wrapper {
+  position: relative;
+  flex: 2 1 260px;
+  min-width: 0;
+}
+
+.search-input {
+  width: 100%;
+  background: rgba(7, 16, 30, 0.85);
+  border: 1px solid var(--border-cyan-glow);
+  border-radius: var(--radius-md);
+  padding: 10px 40px 10px 16px;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: var(--text-white);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: var(--aqua-glow);
+  box-shadow: 0 0 16px rgba(0, 245, 212, 0.25);
+  background: rgba(10, 23, 42, 0.95);
+}
+
+.search-clear-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.85rem;
+  padding: 4px;
+}
+
+.search-spinner {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(56, 189, 248, 0.2);
+  border-top-color: var(--aqua-glow);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #091527;
+  border: 1px solid var(--border-cyan-active);
+  border-radius: var(--radius-md);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+  z-index: 100;
+  max-height: 320px;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.dropdown-group-title {
+  padding: 6px 14px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.dropdown-item {
+  padding: 9px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  min-width: 0;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.dropdown-item .item-name {
+  font-weight: 500;
+  font-size: 0.88rem;
+  color: var(--text-white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.dropdown-item .item-meta {
+  font-size: 0.76rem;
+  color: var(--tide-cyan);
+  flex-shrink: 0;
+}
+
+.dropdown-geocode {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 4px;
+  background: rgba(0, 245, 212, 0.05);
+}
+
+.gps-btn {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.3), rgba(20, 184, 166, 0.3));
+  border: 1px solid var(--aqua-glow);
+  color: var(--aqua-glow);
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.88rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.gps-btn:hover {
+  background: linear-gradient(135deg, rgba(2, 132, 199, 0.6), rgba(20, 184, 166, 0.6));
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Coastal Hubs Bar */
+.coastal-hubs-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  width: 100%;
+  min-width: 0;
+}
+
+.hubs-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.hubs-scroll {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  flex: 1;
+  min-width: 0;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.hub-chip {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-driftwood);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.hub-chip:hover {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--text-white);
+  border-color: var(--tide-cyan);
+}
+
+.hub-chip.active {
+  background: rgba(0, 245, 212, 0.2);
+  color: var(--aqua-glow);
+  border-color: var(--aqua-glow);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   TOP SECTION: CURRENT STATUS GAUGE (LEFT) & PREDICTIONS / CHART (RIGHT)
+   ========================================================================== */
+
+.dashboard-top-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+  gap: 20px;
+  margin-bottom: 28px;
+  width: 100%;
+  min-width: 0;
+}
+
+.dashboard-top-left,
+.dashboard-top-right {
+  min-width: 0;
+  width: 100%;
+}
+
+/* Top Left: Tide Gauge */
+.tide-gauge-card {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.card-tag {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.sensor-badge {
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+.badge-sensor {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--kelp-green);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-pred {
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--tide-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.82rem;
+}
+
+.status-indicator.status-rising {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--aqua-glow);
+  border: 1px solid rgba(0, 245, 212, 0.4);
+  box-shadow: 0 0 14px rgba(0, 245, 212, 0.2);
+}
+
+.status-indicator.status-falling {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--sand-amber);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
+}
+
+.status-arrow {
+  font-size: 0.85rem;
+  animation: pulseArrow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulseArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.status-falling .status-arrow {
+  animation-name: pulseArrowDown;
+}
+
+@keyframes pulseArrowDown {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+/* Gauge Circular Dial */
+.gauge-display-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0 16px;
+  width: 100%;
+}
+
+.tide-dial {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  max-width: 100%;
+}
+
+.tide-dial-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dial-outer-track {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.12);
+  stroke-width: 4;
+}
+
+.dial-bezel-border {
+  fill: none;
+  stroke: rgba(56, 189, 248, 0.3);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(0, 245, 212, 0.3));
+}
+
+.dial-tick {
+  stroke: var(--text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.tick-high {
+  stroke: var(--tide-cyan);
+  stroke-width: 3;
+}
+
+.tick-low {
+  stroke: var(--sand-amber);
+  stroke-width: 3;
+}
+
+.dial-label-text {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+.high-label { fill: var(--tide-cyan); }
+.low-label { fill: var(--sand-amber); }
+
+/* Animated Waves */
+.wave-layer-front {
+  animation: waveFloat 4s ease-in-out infinite alternate;
+}
+
+.wave-layer-back {
+  animation: waveFloatBack 5s ease-in-out infinite alternate;
+}
+
+@keyframes waveFloat {
+  0% { transform: translateX(-6px) scaleY(0.95); }
+  100% { transform: translateX(6px) scaleY(1.05); }
+}
+
+@keyframes waveFloatBack {
+  0% { transform: translateX(8px) scaleY(1.05); }
+  100% { transform: translateX(-8px) scaleY(0.95); }
+}
+
+/* Gauge Numerical Readout */
+.gauge-center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  width: 85%;
+}
+
+.gauge-height-number {
+  font-family: var(--font-display);
+  font-size: 2.1rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1;
+  text-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+}
+
+.gauge-datum-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(7, 16, 30, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-top: 5px;
+}
+
+.datum-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--tide-cyan);
+  letter-spacing: 0.05em;
+}
+
+.datum-tooltip {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  cursor: help;
+  pointer-events: auto;
+}
+
+.gauge-water-pct {
+  font-size: 0.75rem;
+  color: var(--text-driftwood);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+/* Gauge Bottom Info */
+.gauge-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.next-turn-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(7, 16, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.turn-icon {
+  font-size: 1.3rem;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.status-rising .turn-icon {
+  color: var(--aqua-glow);
+  background: rgba(0, 245, 212, 0.15);
+}
+
+.status-falling .turn-icon {
+  color: var(--sand-amber);
+  background: rgba(245, 158, 11, 0.15);
+}
+
+.turn-info {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.turn-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-white);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.turn-sub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tidal-range-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 100%;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+}
+
+.range-track {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: visible;
+  width: 100%;
+}
+
+.range-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--sand-amber), var(--aqua-glow));
+  border-radius: 3px;
+}
+
+.range-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  background: var(--text-white);
+  border: 2px solid var(--aqua-glow);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 245, 212, 0.6);
+}
+
+/* ==========================================================================
+   TOP RIGHT: IMMEDIATE PREDICTIONS & 24H TIDE CHART
+   ========================================================================== */
+
+.dashboard-top-right {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.immediate-predictions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.parallel-panels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+.prediction-card {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.card-high-tide {
+  border-top: 3px solid var(--tide-cyan);
+}
+
+.card-low-tide {
+  border-top: 3px solid var(--sand-amber);
+}
+
+.pred-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.pred-title-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.pred-icon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.pred-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-white);
+  white-space: nowrap;
+}
+
+.pred-countdown-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.badge-high {
+  background: rgba(14, 165, 233, 0.15);
+  color: var(--tide-cyan);
+  border: 1px solid rgba(14, 165, 233, 0.35);
+}
+
+.badge-low {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--sand-amber);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.pred-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.pred-time-row {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.pred-time {
+  font-family: var(--font-display);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.pred-date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.pred-height-row {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.pred-height-value {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--aqua-glow);
+  white-space: nowrap;
+}
+
+.pred-datum-tag {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.pred-wave-visual {
+  margin-top: 8px;
+  opacity: 0.75;
+  width: 100%;
+  overflow: hidden;
+}
+
+.mini-crest-svg, .mini-trough-svg {
+  width: 100%;
+  height: 20px;
+  display: block;
+}
+
+/* Schedule Ribbon */
+.schedule-ribbon {
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.ribbon-title {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ribbon-items {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
+}
+
+.ribbon-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(7, 16, 30, 0.6);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.ribbon-item.item-high .item-tag {
+  color: var(--tide-cyan);
+  font-weight: 700;
+}
+
+.ribbon-item.item-low .item-tag {
+  color: var(--sand-amber);
+  font-weight: 700;
+}
+
+.item-time {
+  color: var(--text-white);
+  font-weight: 500;
+}
+
+.item-height {
+  color: var(--aqua-glow);
+  font-family: var(--font-mono);
+}
+
+.item-rel {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
+/* Tide Curve Chart */
+.tide-chart-card {
+  padding: 18px 20px;
+  width: 100%;
+  min-width: 0;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 10px;
+}
+
+.chart-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-white);
+}
+
+.chart-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.chart-controls {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.chart-range-btn {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--border-cyan-glow);
+  color: var(--text-driftwood);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.chart-range-btn:hover {
+  color: var(--text-white);
+  border-color: var(--tide-cyan);
+}
+
+.chart-range-btn.active {
+  background: rgba(0, 245, 212, 0.2);
+  color: var(--aqua-glow);
+  border-color: var(--aqua-glow);
+}
+
+.chart-svg-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.tide-chart-svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.chart-grid-line {
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 1;
+}
+
+.chart-mllw-line {
+  stroke: #ef4444;
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+  opacity: 0.8;
+}
+
+.chart-mllw-label {
+  fill: #f87171;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.axis-tick-line {
+  stroke: rgba(255, 255, 255, 0.1);
+  stroke-width: 1;
+}
+
+.axis-tick-text {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+}
+
+.chart-y-tick-text {
+  fill: var(--text-dim);
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+}
+
+.chart-mllw-axis-text {
+  fill: #f87171;
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  font-weight: 700;
+}
+
+.hilo-marker-text {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+}
+
+.marker-high { fill: var(--tide-cyan); }
+.marker-low { fill: var(--sand-amber); }
+
+/* Real-Time Now Scrubber */
+.now-vertical-line {
+  stroke: var(--aqua-glow);
+  stroke-width: 2;
+  stroke-dasharray: 2 2;
+}
+
+.now-pulsing-outer {
+  fill: rgba(0, 245, 212, 0.3);
+  animation: pulseNow 2s infinite ease-out;
+}
+
+.now-dot-inner {
+  fill: var(--aqua-glow);
+  stroke: #08121e;
+  stroke-width: 2;
+}
+
+.now-badge-bg {
+  fill: var(--aqua-glow);
+}
+
+.now-badge-text {
+  fill: #08121e;
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+@keyframes pulseNow {
+  0% { r: 5; opacity: 0.8; }
+  100% { r: 14; opacity: 0; }
+}
+
+/* Hover Crosshair & Tooltip */
+.chart-crosshair line {
+  stroke: rgba(255, 255, 255, 0.4);
+  stroke-width: 1;
+  stroke-dasharray: 2 2;
+}
+
+.chart-crosshair circle {
+  fill: #ffffff;
+  stroke: var(--tide-cyan);
+  stroke-width: 2;
+}
+
+.chart-hover-tooltip {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  background: #0b1c33;
+  border: 1px solid var(--aqua-glow);
+  border-radius: var(--radius-sm);
+  padding: 5px 8px;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.tooltip-time {
+  font-size: 0.72rem;
+  color: var(--text-driftwood);
+}
+
+.tooltip-val {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--aqua-glow);
+}
+
+/* ==========================================================================
+   BOTTOM SECTION: THE THREE EXTREME TIDES COUNTDOWNS
+   ========================================================================== */
+
+.extreme-tides-section {
+  margin-top: 6px;
+  width: 100%;
+  min-width: 0;
+}
+
+.section-title-wrap {
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-white);
+}
+
+.section-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-driftwood);
+}
+
+.three-columns-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  min-width: 0;
+}
+
+.extreme-column {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.card-spring-tide {
+  border-top: 3px solid var(--tide-cyan);
+}
+
+.card-perigean-tide {
+  border-top: 3px solid var(--aqua-glow);
+}
+
+.card-king-tide {
+  border-top: 3px solid var(--coral-rose);
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.08) 0%, rgba(15, 29, 49, 0.72) 40%);
+}
+
+.column-header {
+  margin-bottom: 12px;
+}
+
+.column-tag-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 6px;
+}
+
+.column-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.tag-spring {
+  background: rgba(14, 165, 233, 0.15);
+  color: var(--tide-cyan);
+  border: 1px solid rgba(14, 165, 233, 0.3);
+}
+
+.tag-perigee {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--aqua-glow);
+  border: 1px solid rgba(0, 245, 212, 0.3);
+}
+
+.tag-king {
+  background: rgba(244, 63, 94, 0.2);
+  color: var(--coral-rose);
+  border: 1px solid rgba(244, 63, 94, 0.4);
+}
+
+.column-period {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.column-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-white);
+  line-height: 1.2;
+}
+
+.column-sub {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Celestial Graphics */
+.celestial-graphic-wrap {
+  background: rgba(5, 12, 22, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-md);
+  padding: 10px;
+  margin-bottom: 14px;
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.celestial-svg {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.celestial-label {
+  fill: var(--text-muted);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.celestial-sub-label {
+  fill: var(--text-dim);
+  font-family: var(--font-display);
+  font-size: 8px;
+}
+
+.celestial-highlight-label {
+  fill: var(--aqua-glow);
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.syzygy-header-text {
+  fill: rgba(255, 255, 255, 0.5);
+  font-family: var(--font-mono);
+  font-size: 8.5px;
+  letter-spacing: 0.08em;
+}
+
+.syzygy-sub-text {
+  fill: var(--text-muted);
+  font-size: 8.5px;
+  font-family: var(--font-body);
+}
+
+.dist-label {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 8px;
+}
+
+.vector-label {
+  fill: #f59e0b;
+  font-size: 7.5px;
+}
+
+.proximity-label {
+  fill: var(--aqua-glow);
+  font-size: 7.5px;
+}
+
+.king-alert-text {
+  fill: #fecdd3;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.text-cyan { fill: var(--aqua-glow) !important; }
+.text-rose { fill: var(--coral-rose) !important; }
+
+.bulge-pulse {
+  animation: pulseBulge 3s ease-in-out infinite alternate;
+  transform-origin: 150px 65px;
+}
+
+.king-bulge-pulse {
+  animation: pulseKingBulge 2.5s ease-in-out infinite alternate;
+  transform-origin: 140px 65px;
+}
+
+@keyframes pulseBulge {
+  0% { transform: scaleX(0.96); opacity: 0.7; }
+  100% { transform: scaleX(1.05); opacity: 1; }
+}
+
+@keyframes pulseKingBulge {
+  0% { transform: scaleX(0.95) scaleY(0.95); opacity: 0.75; }
+  100% { transform: scaleX(1.08) scaleY(1.05); opacity: 1; }
+}
+
+.glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite alternate;
+}
+
+@keyframes glowPulse {
+  0% { opacity: 0.4; }
+  100% { opacity: 0.9; }
+}
+
+/* Countdowns in Extreme Cards */
+.countdown-card {
+  background: rgba(7, 16, 30, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  width: 100%;
+}
+
+.card-king-timer {
+  border-color: rgba(244, 63, 94, 0.3);
+  box-shadow: 0 0 18px rgba(244, 63, 94, 0.15);
+}
+
+.countdown-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.countdown-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 6px;
+  width: 100%;
+}
+
+.time-block {
+  display: flex;
+  align-items: baseline;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 4px 6px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  min-width: 38px;
+  justify-content: center;
+}
+
+.time-num {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-white);
+  line-height: 1;
+}
+
+.time-unit {
+  font-size: 0.68rem;
+  color: var(--tide-cyan);
+  margin-left: 2px;
+  font-weight: 600;
+}
+
+.time-colon {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+.event-target-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  gap: 6px;
+}
+
+.event-phase-tag {
+  background: rgba(14, 165, 233, 0.15);
+  color: var(--tide-cyan);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tag-cyan {
+  background: rgba(0, 245, 212, 0.15);
+  color: var(--aqua-glow);
+}
+
+.tag-rose {
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--coral-rose);
+}
+
+.event-target-date {
+  color: var(--text-driftwood);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Educational Explanations */
+.column-explanation {
+  font-size: 0.8rem;
+  color: var(--text-driftwood);
+  line-height: 1.5;
+}
+
+.explanation-p {
+  margin-bottom: 6px;
+}
+
+.explanation-p strong {
+  color: var(--text-white);
+}
+
+.explanation-p em {
+  color: var(--aqua-glow);
+  font-style: normal;
+  font-weight: 600;
+}
+
+.upcoming-king-list {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.75rem;
+}
+
+.upcoming-king-title {
+  display: block;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.upcoming-king-list ul {
+  list-style: none;
+}
+
+.upcoming-king-list li {
+  color: var(--text-driftwood);
+  padding: 2px 0;
+}
+
+.upcoming-king-list li strong {
+  color: var(--coral-rose);
+}
+
+/* ==========================================================================
+   GOOGLE TV / 10-FOOT KIOSK MODE
+   ========================================================================== */
+
+body.tv-kiosk-mode {
+  padding: 0;
+}
+
+body.tv-kiosk-mode .app-container {
+  max-width: 100vw;
+  min-height: 100vh;
+  padding: 24px 36px;
+}
+
+body.tv-kiosk-mode .brand-text h1 {
+  font-size: 2.1rem;
+}
+
+body.tv-kiosk-mode .header-clock {
+  font-size: 1.5rem;
+  padding: 8px 18px;
+}
+
+body.tv-kiosk-mode .gauge-height-number {
+  font-size: 2.8rem;
+}
+
+body.tv-kiosk-mode .pred-time {
+  font-size: 2.1rem;
+}
+
+body.tv-kiosk-mode .pred-height-value {
+  font-size: 1.6rem;
+}
+
+body.tv-kiosk-mode .time-num {
+  font-size: 1.6rem;
+}
+
+/* TV Remote Focus Ring Highlight */
+body.tv-kiosk-mode :focus-visible {
+  outline: 4px solid #00f5d4 !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 25px rgba(0, 245, 212, 0.8) !important;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (DESKTOP, TABLET & MOBILE BREAKPOINTS)
+   ========================================================================== */
+
+/* Large Tablets & Medium Laptops (under 1120px) */
+@media (max-width: 1120px) {
+  .dashboard-top-grid {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    gap: 16px;
+  }
+
+  .three-columns-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* Tablets (under 960px) */
+@media (max-width: 960px) {
+  .dashboard-top-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .three-columns-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tide-dial {
+    width: 200px;
+    height: 200px;
+  }
+
+  .gauge-height-number {
+    font-size: 1.9rem;
+  }
+}
+
+/* Mobile Screens (under 680px) */
+@media (max-width: 680px) {
+  .app-container {
+    padding: 14px 12px 36px;
+  }
+
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .location-bar {
+    padding: 12px 14px;
+  }
+
+  .location-bar-main {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .active-station-group {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .search-input-wrapper {
+    flex: 1 1 auto;
+    width: 100%;
+  }
+
+  .gps-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .parallel-panels {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-text h1 {
+    font-size: 1.35rem;
+  }
+
+  .pred-time {
+    font-size: 1.45rem;
+  }
+
+  .pred-height-value {
+    font-size: 1.25rem;
+  }
+}
+
+/* Skeleton Loading Pulse */
+.skeleton-pulse {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.04) 75%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes skeletonPulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.circle-skeleton {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  margin: 20px auto;
+}
+
+.panel-skeleton {
+  height: 120px;
+  margin-bottom: 12px;
+}
+
+.column-skeleton {
+  height: 280px;
+}

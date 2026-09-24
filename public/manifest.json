@@ -1,0 +1,28 @@
+﻿{
+  "name": "Local Tide - Marine & Astronomical Dashboard",
+  "short_name": "Local Tide",
+  "id": "com.localtide.pwa",
+  "description": "Real-time coastal tide dashboard with MLLW levels, predictions, and Spring, Perigean, and King Tide celestial countdowns.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#08121e",
+  "theme_color": "#08121e",
+  "categories": ["weather", "navigation", "utilities", "education"],
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
